@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaInstagram, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 import "./Footer.css";
 
