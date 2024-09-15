@@ -14,6 +14,7 @@ const Footer = () => {
           <a href="/Projects" className="link">Projects</a>
           <a href="/About" className="link">About</a>
           <a href="/Contact" className="link">Contact Me</a>
+          <a href="https://drive.google.com/file/d/12Ugiun_qeDApdijsTq1qs1gvw1G7OwNt/view?usp=sharing" className="link">Resume</a>
         </div>
         <div className="column">
           <h2 className="heading">Follow Me</h2>
