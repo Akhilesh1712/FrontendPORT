@@ -1,7 +1,7 @@
 import "./Form.css";
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Importing toastify CSS
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const Form = () => {
   const [fileName, setFileName] = useState("");
@@ -10,7 +10,8 @@ const Form = () => {
     subject: '',
     message: ''
   });
-  const baseUrl = 'https://portfoliobackend-lcr3.onrender.com'; 
+  const [loading, setLoading] = useState(false);
+  const baseUrl = 'http://localhost:5000';
 
   const handleFileChange = (e) => {
     setFileName(e.target.files[0]?.name || "");
@@ -26,21 +27,21 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
+    setLoading(true);
     const response = await sendEmail();
   
     if (response.ok) {
-      // If the response is ok, clear the form and show success toast
       setFormData({
         email: '',
         subject: '',
         message: ''
       });
-      setFileName(""); // Clear the file name as well
+      setFileName(""); 
       toast.success("Email Sent Successfully!");
     } else {
-      // Show an error toast if the response is not ok
       toast.error("Failed to send email. Please try again.");
     }
+    setLoading(false); 
   };
   
   const sendEmail = async () => {
@@ -60,11 +61,11 @@ const Form = () => {
         },
       });
   
-      return res; // Return the response to handle it in the handleSubmit function
+      return res; 
     } catch (error) {
       console.error("Error sending email:", error);
       toast.error("An error occurred. Please try again later.");
-      return { ok: false }; // Return a false response to handle the error
+      return { ok: false }; 
     }
   };
 
@@ -114,10 +115,16 @@ const Form = () => {
             />
             {fileName && <span className="file-name">Selected: {fileName}</span>}
           </label>
-          <button className="btn4" type="submit">Submit</button>
+          <button className="btn4" type="submit" disabled={loading}>
+            {loading ? (
+              <span className="loader"></span>
+            ) : (
+              "Submit"
+            )}
+          </button>
         </form>
       </div>
-      <ToastContainer /> {/* Toast Container to display notifications */}
+      <ToastContainer />
     </div>
   );
 };
